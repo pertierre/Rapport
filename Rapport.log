@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.11.16)  5 FEB 2017 14:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=pdflatex 2016.11.16)  5 FEB 2017 23:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -629,38 +629,178 @@ File: Intersection.png Graphic file (type png)
 Package pdftex.def Info: Intersection.png used on input line 113.
 (pdftex.def)             Requested size: 411.9399pt x 268.90884pt.
 
-[4 <./Route.png> <./StartEnd.png>] [5 <./Intersection.png>] [6] [7]
-Overfull \hbox (0.76413pt too wide) in paragraph at lines 174--175
+[4 <./Route.png> <./StartEnd.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 128--129
+
+ []
+
+<UML_evenements.png, id=34, 565.11125pt x 423.5825pt>
+File: UML_evenements.png Graphic file (type png)
+ <use UML_evenements.png>
+Package pdftex.def Info: UML_evenements.png used on input line 136.
+(pdftex.def)             Requested size: 370.74338pt x 277.89777pt.
+
+[5 <./Intersection.png>] [6 <./UML_evenements.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--170
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
+
+ []
+
+<UML_entites.png, id=44, 757.83125pt x 1810.765pt>
+File: UML_entites.png Graphic file (type png)
+ <use UML_entites.png>
+Package pdftex.def Info: UML_entites.png used on input line 179.
+(pdftex.def)             Requested size: 211.91377pt x 506.34996pt.
+
+[8]
+Overfull \vbox (2.81352pt too high) has occurred while \output is active []
+
+
+[9 <./UML_entites.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 199--201
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
+
+ []
+
+<UML_moteur.png, id=51, 592.2125pt x 496.85625pt>
+File: UML_moteur.png Graphic file (type png)
+ <use UML_moteur.png>
+Package pdftex.def Info: UML_moteur.png used on input line 209.
+(pdftex.def)             Requested size: 370.74338pt x 311.0575pt.
+ [10]
+[11 <./UML_moteur.png (PNG copy)>]
+Overfull \hbox (0.76413pt too wide) in paragraph at lines 225--226
 []\T1/pnc/b/n/12 private Lin-ked-List<StartEnd> lis-teS-tar-tEnd \T1/pnc/m/n/12
  : Pour sa-voir quels
  []
 
-[8] [9] [10] [11]
-Overfull \hbox (62.69508pt too wide) in paragraph at lines 206--207
+
+Underfull \hbox (badness 10000) in paragraph at lines 225--226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--228
+
+ []
+
+[12]
+Overfull \hbox (30.0564pt too wide) in paragraph at lines 262--263
+\T1/pnc/m/sc/17.28 RES-PONDE AO MO-DELO DADO[MODELO CLAS-
+ []
+
+[13] [14] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 277--278
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--280
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 281--282
+
+ []
+
+
+Overfull \hbox (62.69508pt too wide) in paragraph at lines 283--284
 []\T1/pnc/m/n/12 Changer la mé-thode d'ini-tia-li-sa-tion du sys-tème pour que 
 les routes/intersections
  []
 
-[12] (./Rapport.aux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+Underfull \hbox (badness 10000) in paragraph at lines 283--284
 
- ) 
+ []
+
+[16]
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.292 \bibitem{asdasd}
+                      
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+<argument> \@listctr 
+                     
+l.292 \bibitem{asdasd}
+                      
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! You can't use `\relax' after \the.
+<recently read> \c@ 
+                    
+l.292 \bibitem{asdasd}
+                      
+I'm forgetting what you said and using zero instead.
+
+[17] (./Rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 3734 strings out of 493013
- 49416 string characters out of 6139316
- 122252 words of memory out of 5000000
- 7205 multiletter control sequences out of 15000+600000
- 42459 words of font info for 49 fonts, out of 8000000 for 9000
+ 3756 strings out of 493013
+ 49776 string characters out of 6139316
+ 122282 words of memory out of 5000000
+ 7222 multiletter control sequences out of 15000+600000
+ 44964 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,5n,32p,631b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
-ts/type1/urw/ncntrsbk/uncb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/ncntrsb
-k/uncr8a.pfb>
-Output written on Rapport.pdf (15 pages, 284195 bytes).
+{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/
+share/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb></usr/share/texmf-dist/fon
+ts/type1/urw/ncntrsbk/uncr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/ncntrsb
+k/uncri8a.pfb>
+Output written on Rapport.pdf (20 pages, 517439 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 92 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

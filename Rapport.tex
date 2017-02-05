@@ -121,20 +121,65 @@ Cette classe doit contenir des références vers les routes qu’elle connecte, 
 En plus, il faut implémenter les événements importants de la simulation : 
 
 \begin{itemize}
-\item La création d'un objet véhicule (simulant l'arrivée d'une voiture dans le quartier); 
+\item La création d'un objet véhicule (simulant l'arrivée d'une voiture dans le quartier) ;\\
 
-\item Le passage des feux vert; 
+\item Le passage des feux vert ;\\
 
-\item Quand il faut qu'une voiture s'arrête pour attendre les feux; 
+\item Quand il faut qu'une voiture s'arrête pour attendre les feux ;\\
 
 \item Un événements de mise à jour des entités (routes, voitures, etc...).
 \end{itemize}
-
 %\subsection{Hypothèses particulières}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{UML_evenements.png}
+	\caption{Les événements.}
+	\label{fig:UML_evenements}
+\end{figure}
 
 \newpage
 \section{Modélisation du système}\label{modelisation}
-This is
+Pour modéliser un quartier comme Coruscant dans le système de simulation, il faut d'abord bien définir les lois que suivront chaque entité. C'est-à-dire : il faut qu'on modélise bien chaque action de la voiture dans chaque circonstance, selon les variables d'états des autres entités comme les routes et les intersections. Bien évidemment, ces variables seront elles aussi gérées par des lois de comportement décrivant chaque instance de ces entités permanentes qui composent le quartier étudié.
+%
+\subsection{Routes}
+Les routes doivent à chaque itération compter le nombre de véhicules qui elles comportent. Elles doivent toujours mettre à jour ses listes en vérifiant quelles sont les voitures en train de passer.
+
+\subsection{Intersections}
+Les intersections effectuent toujours les « transactions » de voitures à travers les routes. Pour chaque voiture qui arrive à l'intersection, elle doit aussi recevoir la prochaine route sur laquelle la voiture veut passer. L'intersection doit vérifier si la voiture est sur une route verticale ou horizontale pour savoir quelle est la référence qui doit être libre. Pour finir, l'entité intersection ajoute le véhicule dans la liste de la nouvelle route et mets à jour quelques variables d'état importantes des véhicules :
+\begin{itemize}
+\item \textbf{route}, pour que l'objet voiture mette à jour son information de « route actuelle » ;\\
+
+\item \textbf{sens}, pour montrer à quel sens roule la voiture ;\\
+
+\item \textbf{position}, la localisation de la voiture sur la nouvelle route (0 ou la longueur de la route, parce que la valeur initiale de cette variable dépend du bout par lequel la voiture arrive) ;\\
+
+\item \textbf{hasToStop}, on met la valeur « false » parce que la voiture ne doit plus attendre pour passer (elle l'a déjà fait).
+\end{itemize} 
+
+\subsection{Véhicules}
+Les voitures sont les entités plus complexes à être modélisés. 
+%
+D'abord, l'information de quelles sont les routes par lesquelles la voiture doit passer sont calculées. Un boucle est créé pour calculer le chemin est les routes sont sauvegardés (en ordre) dans une liste.
+
+Le moteur de simulation fait que les voitures suivent leur règles de comportement, comme :
+\begin{itemize}
+\item Régler la vitesse des voitures. Si on arrive à une intersection/feux, on doit diminuer la vitesse au cas où. Si on a une voiture devant nous, on ne peut pas avoir une vitesse plus haute que la sienne. ;\\
+
+\item Vérifier si elle est bloquée par une voiture qui est devant (booléen « isBlockedByCar » de la classe Véhicule) ;\\
+
+\item Vérifier s'il faut attendre à l'intersection et bien vérifier quand est-ce que la voiture peut passer (attendre les feux par exemple, s'il y a des feux dans l'intersection) ;\\
+
+\item Bouger le véhicule sur la route selon sa vitesse.
+\end{itemize} 
+
+\subsection{Diagrammes de classes des entités}
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=0.9\textheight]{UML_entites.png}
+	\caption{Relations entre les entités.}
+	\label{fig:UML_entites}
+\end{figure}
 
 \newpage
 \section{Implémentation du modèle}\label{implementation}
@@ -149,16 +194,22 @@ La classe SimEngine est la classe principale qui crée le moteur de simulation. 
 
 En plus, dans cette classe il y a un système de notification (un « Listener ») qui notifie tout changement d'état du moteur. 
 
-Après la mise en place du moteur de simulations avec les paramètres desquels il dépend, la simulation doit être lancé en exécutant une méthode d'initialisation, qui crée les événements et les objets pour toute la durée choisie de la simulation. 
+Après la mise en place du moteur de simulations avec les paramètres desquels il dépend, la simulation doit être lancé en exécutant une méthode d'initialisation, qui crée les événements et les objets pour toute la durée choisie de la simulation.
 
 \item \textbf{SimObject :} Cette classe abstraite joue le rôle de l’entité manipulé le moteur de simulation, et doit connaître qui est le moteur de simulation qui doit l'animer.
-Un SimObject a un nom et un identifiant unique, et peut être activé ou désactivé.
+Un SimObject a un nom et un identifiant unique, et peut être activé ou désactivé.\\
 
-\item \textbf{SimTimeEvent :} Classe modélisant un événement temporel.
+\item \textbf{SimTimeEvent :} Classe modélisant un événement temporel.\\
 
 \item \textbf{SimEntity :} Hérite de SimObject, cette entité de simulation apporte de nouveaux services, comme des constructeurs utilisant les paramètres de l’entité, une gestion d’entités filles, et une gestion du cycle de vie de l’entité. Des Listeners permettent de notifier les changements d’état du système.
+\end{itemize} 
 
-\end{itemize}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{UML_moteur.png}
+	\caption{Les composants du moteur de simulation.}
+	\label{fig:UML_moteur}
+\end{figure}
 
 \subsection{Système implémenté}
 Le système implémente une classe « Monitor » qui joue le rôle de la méthode principale. Elle initialise deux loggers, un pour la sortie standard qui montre l'état après chaque événement et un autre qui crée un fichier dans lequel les résultats de la simulation seront sauvegardés. Pour le deuxième, le Monitor doit savoir où créer le fichier.
@@ -171,25 +222,51 @@ Ces paramètres sont utilisés dans le constructeur de la classe CreationEnviron
 %
 Cet objet environnement possède trois listes :
 \begin{itemize}
-\item \textbf{private LinkedList<StartEnd> listeStartEnd} : Pour savoir quels sont les points possibles d'arrivée et départ (objet StartEnd);
+\item \textbf{private LinkedList<StartEnd> listeStartEnd} : Pour savoir quels sont les points possibles d'arrivée et départ (objet StartEnd) ;\\
 
-\item \textbf{private LinkedList<Intersection> listeInter} : Les intersections;
+\item \textbf{private LinkedList<Intersection> listeInter} : Les intersections ;\\
 
 \item \textbf{private LinkedList<Route> listeRoute} : Pour sauvegarder les routes crées par le constructeur.
-\end{itemize}
+\end{itemize} 
 
 Pour finir, le Monitor lance la simulation, attend qu'elle finisse et ferme le logger créant le fichier des résultats.
 
 \newpage
 \section{Compte-rendu de V\&V}\label{VV}
-This is
+\subsection{Introduction}
+
+La vérification et validation (V\&V) sont importantes pour chaque étape de la construction du code. Avec les tests on peut trouver les erreurs du logiciel et les défauts du système concertant aux objectifs attendus dans son cycle de vie (en notre cas, plutôt la partie de conception et construction). Donc, la façon comment les tests étaient effectués et leur analyse sera présentée et détaillée ci-dessous.
+
+D'abord, lors de l'analyse de besoins, on a définie les intentions à travers  des spécifications fonctionnelles, c'est-à-dire la façon dont les exigences seront prises en compte. Cette partie est important comme un guide pour que l'on ne s'éloigne pas des consignes et sert comme un prélude pour l'application des tests de V\&V.
+
+Dans la vérification on peut noter la conformité avec les spécifications fonctionnelles établies dans les phases précédents du développement. Donc on cherche vérifier si le projet est conforme sa spécification et si l'on le fait de la manière correcte.
+
+Finalement, dans l'étape de validation on produit de tests d'acceptation en se basant sur le cahier de charges. Le logiciel doit faire ce que l'utilisateur a besoin, alors on se focalise aux erreurs de concept relatifs à les exigences.
+%==========================================================================
+%verification :
+%-faisons-nous le produit correctement [le projet doit etre conforme a sa specification]
+%-erreurs par rapport aux définitions précises établies 
+
+%validation :
+%-Dans la partie de validation on se demande "faisons-nous le bon produit ?" [le logiciel doit faire ce que l'utilisateur a besoin]
+%-Defaut par rapport aux besoin du client 
+%====================================================================
+
+\subsection{Processus}
+Si l'on fait un rappel des exigences du client, il faut produire un outil capable de simuler une situation réel et que l'on puisse la modifier pour chercher des solutions et l'adapter à d'autres situations. Donc, le développement de tel outil demande de la rigueur, de l'abstraction et des connaissances approfondies en programmation.
+
+Donc, vue que l'on a pris un code de base pour effectuer nos tests, plutôt qu'analyser le code en cherchant des erreurs (type statique de validation), on est centré dans l'exécution du même (type dynamique), i.e. on fait une analyse \textit{a posteriori} du système.
+
+Puisque la priorité c'est de recréer l'ambiance réel du quartier de Coruscant pour que l'on puisse l'étudier, on a fait plusieurs tests pour corriger des erreurs et un test de validation pour examiner si les résultats correspondent au modèle donné :
+
+\textsc{\Large DEMONSTRAçAO QUE A SIULAçAO CORRESPONDE AO MODELO DADO[MODELO CLASSICO]}
+
+Il est possible de voir qu'il n'y a pas de défauts, donc on peut en déduire que le système est utilisable en pratique.
+
+\textsc{\Large [MODELO ADAPTADO(soluçao)]}
 
 \newpage
-\section{Résultats de la simulation}\label{resultats-sim}
-This is
-
-\newpage
-\section{Analyse des résultats}\label{resultats-analyse}
+\section{Analyse des résultats de la simulation}\label{resultats}
 This is
 
 \newpage
@@ -197,17 +274,18 @@ This is
 Pour qu’un meilleur logiciel de simulation puisse être implémenté, plusieurs modifications peuvent être envisagées : 
 
 \begin{itemize}
-\item Les voitures ne sont pas toutes identiques, c’est-à-dire, des modèles probabilistes peuvent être développées pour les paramètres décrivant les voitures. 
+\item Les voitures ne sont pas toutes identiques, c’est-à-dire, des modèles probabilistes peuvent être développées pour les paramètres décrivant les voitures ;\\
 
-\item La création d’un modèle plus réaliste pour le redémarrage de la voiture. 
+\item La création d’un modèle plus réaliste pour le redémarrage de la voiture ;\\
 
-\item Trouver une manière de modéliser les événements particuliers (véhicule qui passe devant celui d’avant, par exemple). 
+\item Trouver une manière de modéliser les événements particuliers (véhicule qui passe devant celui d’avant, par exemple) ;\\
 
-\item Changer la méthode d'initialisation du système pour que les routes/intersections puissent aussi être facilement créées pour simuler d'autres quartiers.
+\item Changer la méthode d'initialisation du système pour que les routes/intersections puissent aussi être facilement créées pour simuler d'autres quartiers ;\\
 
 \item Ajouter une option pour étudier comment un accident ou une obstruction sur une de routes peut impacter les autres.
-\end{itemize}
+\end{itemize} 
 
+\newpage
 
 
 
