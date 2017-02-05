@@ -7,6 +7,9 @@
 \usepackage[francais]{babel}
 \usepackage[T1]{fontenc}
 
+% Reference the bibliography in summary
+\usepackage[nottoc,notlof,numbib]{tocbibind}
+
 % Graphics preamble
 \usepackage{graphicx} % Allows to import images
 \usepackage{float} % Allows for control of float positions
@@ -286,7 +289,9 @@ Pour qu’un meilleur logiciel de simulation puisse être implémenté, plusieur
 \end{itemize} 
 
 \newpage
-
+\bibliographystyle{plain}
+\bibliography{bibfile}
+\nocite{*}
 
 
 \end{document}
