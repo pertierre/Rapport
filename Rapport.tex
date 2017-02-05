@@ -51,8 +51,8 @@ La présente étude a comme but trouver une solution qui améliore le trafic d'u
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[height=3in]{Figure1.png}
-	\caption[Figure 1]{Carrefour Routier de Coruscant}
+	\includegraphics[width=\linewidth]{Figure1.png}
+	\caption{Carrefour Routier de Coruscant}
 	\label{fig:fig1}
 \end{figure}
 
@@ -76,13 +76,45 @@ L’environnement compte avec plusieurs entités. Les principales sont :
 
 \begin{itemize}
 \item \textbf{Véhicules :}
-Une entité modélisant les véhicules. Chaque voiture doit avoir des variables comme : vitesse, lieux de départ et arrivée, position actuelle, route actuelle, une référence qui indique la voiture qui est juste devant et des variables booléens indiquant quelques états : si la voiture est déjà arrivée, si elle est en train d’attendre le feu vert, si elle est bloquée par une voiture qui est devant. 
+Une entité modélisant les véhicules. Chaque voiture doit avoir des variables comme : vitesse, lieux de départ et arrivée, position actuelle, route actuelle, une référence qui indique la voiture qui est juste devant et des variables booléens indiquant quelques états : si la voiture est déjà arrivée, si elle est en train d’attendre le feu vert, si elle est bloquée par une voiture qui est devant.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Vehicle.png}
+	\caption{Classe « Vehicle »}
+	\label{fig:Vehicle}
+\end{figure}
 
 \item \textbf{Routes :}
-Une classe pour modéliser les routes. Elle doit être munie d’une liste des voitures actuellement présentes, des intersections, les endroits de début et de fin, le nom de la route. 
+Une classe pour modéliser les routes. Elle doit être munie d’une liste des voitures actuellement présentes, des intersections, les endroits de début et de fin, le nom de la route.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Route.png}
+	\caption{Classe « Route »}
+	\label{fig:Route}
+\end{figure}
+
+\item \textbf{Start / End :}
+Classe qui décrit où sont les points d'entrée et sortie du quartier.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{StartEnd.png}
+	\caption{Classe « StartEnd »}
+	\label{fig:StartEnd}
+\end{figure}
 
 \item \textbf{Intersections :}
 Cette classe doit contenir des références vers les routes qu’elle connecte, des références vers les voitures qui attendent sur chaque route connectée. Aussi faut-il créer un système pour bien implémenter le type d’intersection : Combien de routes elle connecte, s’il y a des feux ou pas. 
+
+\begin{figure}[H]
+	\centering
+-	\includegraphics[width=\linewidth]{Intersection.png}
+	\caption{Classe « Intersection »}
+	\label{fig:Intersection}
+\end{figure}
+
 \end{itemize}
 
 \subsection{Liste des évènements}
@@ -117,7 +149,7 @@ La classe SimEngine est la classe principale qui crée le moteur de simulation. 
 
 En plus, dans cette classe il y a un système de notification (un « Listener ») qui notifie tout changement d'état du moteur. 
 
-Après la mise en place du moteur de simulations avec les paramètres desquels il dépend, la simulation doit être lancé en exécutant une méthode d'initialisation, qui traite chaque événement présent dans une liste dynamique d'événements. 
+Après la mise en place du moteur de simulations avec les paramètres desquels il dépend, la simulation doit être lancé en exécutant une méthode d'initialisation, qui crée les événements et les objets pour toute la durée choisie de la simulation. 
 
 \item \textbf{SimObject :} Cette classe abstraite joue le rôle de l’entité manipulé le moteur de simulation, et doit connaître qui est le moteur de simulation qui doit l'animer.
 Un SimObject a un nom et un identifiant unique, et peut être activé ou désactivé.
